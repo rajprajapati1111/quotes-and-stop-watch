@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background-color 0.7s ease;
+}
+
+#container {
+    text-align: center;
+    background-color: aqua;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 7px 8px 3px 2px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    max-height: 250px;
+    min-height: 250px;
+    height: 300px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+#quote {
+    font-size: 18px;
+    color: #555;
+    margin: 20px 0;
+    font-style: italic;
+    height: 60px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 40px;
+}
+
+button:hover {
+    background-color: #607d8b;
+}
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1 id="h1">Random Quote Generator</h1>
+        <p id="quote">Click the button below to get a random quote!</p>
+        <button>next</button>
+    </div>
+
+    <script>
+        
+let  quotes = [
+    {
+        h1: "Oscar Wilde",
+        text: "“Be yourself; everyone else is already taken.”",
+        color: "#f8d7da" , 
+        bgcolor : "#e5a3b9"
+    },
+    {
+        h1: "Albert Einstein",
+        text: "“Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.”.",
+        color: "#d1ecf1" , 
+          bgcolor : "#a195b6"
+    },
+    {
+        h1: "Robert Frost",
+        text: "“In three words I can sum up everything I've learned about life: it goes on.”",
+        color: "#d4edda", 
+        bgcolor : "#f3b29e" 
+    },
+    {
+        h1: "Mark Twain",
+        text: "“If you tell the truth, you don't have to remember anything.”",
+        color: "#fff3cd" ,
+          bgcolor : "#abd1e3"
+    },
+    {
+        h1: " Andre Gide, Autumn Leaves",
+        text: "“It is better to be hated for what you are than to be loved for what you are not.”",
+        color: "#f1e7c8" , 
+          bgcolor : "#dff1ff"
+    }
+];
+let quote = document.getElementById("quote");
+let container =  document.getElementById("container");
+let name =  document.getElementById("h1");
+let btn = document.querySelector("button");
+let count = 0 ;
+
+
+btn.addEventListener('click',()=>{
+    count++;
+    if(count==5){
+        count =0;
+    }
+    updetcard()
+    console.log(count);
+    
+})
+
+function updetcard() {
+    quote.textContent = quotes[count].text;
+    name.textContent = quotes[count].h1;
+    container.style.backgroundColor = quotes[count].bgcolor;   
+    document.body.style.backgroundColor = quotes[count].color;
+}
+    </script>
+
+</body>
+</html>

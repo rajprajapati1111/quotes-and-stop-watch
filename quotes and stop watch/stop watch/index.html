@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            border: 0;
+
+        }
+
+        body {
+            background-color: #303d52;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .stopWatch {
+            width: 30%;
+            height: 231px;
+            background-color: #17202f47;
+            border-radius: 20px;
+        }
+
+        .timer {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-direction: column;
+            height: 250px;
+            margin: 0 auto;
+            color: #ffffff;
+            font-family: cursive;
+        }
+
+        .display {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .buttonCnt {
+            width: 50%;
+            height: auto;
+            padding: 10px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: orangered;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="stopWatch">
+        <div class="timer">
+            <div class="display">
+                <h1 id="hours">00 : </h1>
+                <h1 id="minutes"> &nbsp;00 : </h1>
+                <h1 id="seconds"> &nbsp; 00 </h1>
+            </div>
+            <div class="buttonCnt">
+                <button id="start">Start</button>
+                <button id="stop">Stop</button>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(()=>{
+           
+            let hrs = $("#hours");
+            let seconds = $("#seconds");
+            let mins = $("#minutes");
+
+            let start = $("#start");
+            let stop = $("#stop");
+            let reset = $("#reset");
+
+            let timer = null; //states
+            let totalSecond = 0; //states
+
+            // Function to format time
+
+            function formatTime(value){
+                return value < 10 ? `0${value}` : value;
+            }
+
+            // Function to update the timer
+
+            function updateTime(){
+                let hours = Math.floor(totalSecond / 3600);
+                let minutes = Math.floor(totalSecond % 3600 / 60);
+                let sec = totalSecond % 60;
+           
+                hrs.text(`${formatTime(hours)} : `);
+                mins.text(`${formatTime(minutes)} : `);
+                seconds.text(`${formatTime(sec)}`);
+
+            }
+
+            //buttons Logic
+
+            start.click(()=>{
+                if(!timer){
+                    timer =  setInterval(()=>{
+                        totalSecond++;
+                        updateTime();
+                    },1000)
+                }
+            });
+
+            // stop button logic
+
+            stop.click(()=>{
+                clearInterval(timer);
+               
+                timer = null;
+            });
+
+            // reset button logic
+
+            reset.click(()=>{
+                clearInterval(timer);
+                timer = null;
+
+                totalSecond = 0;
+                updateTime();
+            })
+           
+            updateTime();
+        })
+    </script>
+
+</body>
+
+</html>
